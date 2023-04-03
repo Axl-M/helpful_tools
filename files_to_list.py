@@ -3,7 +3,7 @@ import os
 
 def get_files_list(path):
     """
-    Сохраняет в файл список всех файлов и подкаталогов данного каталога
+    Возвращает в файл список всех файлов и подкаталогов данного каталога
     с полными путями.
     :param path: путь, к каталогу для которого создать список
     :return: список_файлов
@@ -24,6 +24,11 @@ def get_files_list(path):
 
 
 def write_to_file(files_list):
+    """
+    Сохраняет в файл переданный список
+    :param files_list: список_фалов для сохранения
+    :return: None
+    """
     with open(path + '\_files_list.txt', 'w', encoding='utf-8') as file:
         file.write('\n'.join(files_list))
 
