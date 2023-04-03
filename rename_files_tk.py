@@ -3,10 +3,14 @@ from tkinter import filedialog, messagebox
 import os
 
 class FileRenamer(tk.Frame):
+    """
+    Tkinter class
+    rename sub_string in filenames and dirs with new sub_string
+    """
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
-        self.master.title("File Renamer")
+        self.master.title("File Renamer     by AXL-M")
         self.pack()
 
         self.label_path = tk.Label(self, text='Выберите папку:')
@@ -39,17 +43,31 @@ class FileRenamer(tk.Frame):
 
         counter = 0
 
-        for dirname, _, filenames in os.walk(self.folder_path):
+        for dirpath, dirnames, filenames in os.walk(self.folder_path):
+            # переименовывание файлов
             for filename in filenames:
+                # проверяем что файл содержит указанную подстроку
                 if search in filename:
-                    old_path = os.path.join(dirname, filename)
-                    new_path = os.path.join(dirname, filename.replace(search, replace_with))
+                    old_path = os.path.join(dirpath, filename)
+                    new_path = os.path.join(dirpath, filename.replace(search, replace_with))
+                    os.rename(old_path, new_path)
+                    counter += 1
+            # переименовывание подкаталогов в текущем каталоге
+            for dirname in dirnames:
+                if search in dirname:
+                    old_path = os.path.join(dirpath, dirname)
+                    new_path = os.path.join(dirpath, dirname.replace(search, replace_with))
                     os.rename(old_path, new_path)
                     counter += 1
 
-        messagebox.showinfo("Готово", f"Переименовано {counter} файлов.")
+
+        messagebox.showinfo("Готово", f"Переименовано {counter} файлов/папок.")
 
         self.entry_search.delete(0, tk.END)
         self.entry_replace_with.delete(0, tk.END)
         self.button_rename.config(state=tk.DISABLED)
 
+
+root = tk.Tk()
+file_renamer = FileRenamer(master=root)
+file_renamer.mainloop()

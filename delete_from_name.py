@@ -12,7 +12,7 @@ sub_name = '[S1.SLIV.ONE] '
 
 for dirpath, dirnames, filenames in os.walk(folder_path):
     for filename in filenames:
-        # проверем что файл содержит указанную подстроку
+        # проверяем что файл содержит указанную подстроку
         if sub_name in filename:
             # получить полный путь к файлу
             file_path = os.path.join(dirpath, filename)
