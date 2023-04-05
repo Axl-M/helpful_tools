@@ -17,39 +17,79 @@ print(path.is_file())
 print(path.is_dir())
 '''
 
+class DirectoryTree(object):
+    """
+    Создает дерево каталогов
+    путь: целевой каталог
+    filename: им файла для сохранения
+    """
 
-tree_str = ''
+    def __init__(self, path='.', filename='_tree.txt'):
+        super(DirectoryTree, self).__init__()
+        self.path = Path(path)
+        self.filename = filename
+        self.tree = ''
 
-def generate_tree(path, n=0):
-    global tree_str
-    if path.is_file():
-        tree_str += '    |' * n + '-' * 4 + path.name + '\n'
-    elif path.is_dir():
-        tree_str += '    |' * n + '-' * 4 + '[' + str(path.relative_to(path.parent)) + ']' + '\\' + '\n'
-        for folder in path.iterdir():
-            generate_tree(folder, n + 1)
-    return tree_str
+    # def set_path(self, path):
+    #     self.path = Path(path)
+    #
+    # def set_filename(self, filename):
+    #     self.filename = filename
 
-def save_to_file(tree, file_out):
-    with open(file_out, 'w', encoding='utf-8') as f:
-        f.write(tree)
+
+    def generate_tree(self, n=0):
+        if self.path.is_file():
+            self.tree += '    |' * n + '-' * 4 + self.path.name + '\n'
+        elif self.path.is_dir():
+            self.tree += '    |' * n + '-' * 4 + '[' + str(self.path.relative_to(self.path.parent)) + ']' + '\\' + '\n'
+            for folder in self.path.iterdir():
+                self.path = Path(folder)
+                self.generate_tree( n + 1)
+        # return tree_str
+
+    def save_to_file(self):
+        with open(self.filename, 'w', encoding='utf-8') as f:
+            f.write(self.tree)
 
 path = Path('X:\ТЕСТОВЫЙ')
 file_out = str(path) + '\_tree.txt'
 if __name__ == '__main__':
-    tree = generate_tree(path)
-    print(tree_str)
-    save_to_file(tree, file_out)
+    dir_tree = DirectoryTree(path=path, filename=file_out)
+    dir_tree.generate_tree()
+    print(dir_tree.tree)
+    dir_tree.save_to_file()
 
-#
-# if __name__ == '__main__':
-#         # Количество параметров команды 2 и каталог существует
-#     if len(sys.argv) == 2 and Path(sys.argv[1]).exists():
-#         generate_tree(Path(sys.argv[1]), 0)
+
+
+
+# __name__ == '__main__':
+#     dirtree = DirectionTree()
+#     # Количество параметров команды равно 1, и создается дерево каталогов текущего каталога
+#     if len(sys.argv) == 1:
+#         dirtree.set_path(Path.cwd())
+#         dirtree.generate_tree()
+#         print(dirtree.tree)
+#     # Количество параметров команды 2 и каталог существует
+#     elif len(sys.argv) == 2 and Path(sys.argv[1]).exists():
+#         dirtree.set_path(sys.argv[1])
+#         dirtree.generate_tree()
+#         print(dirtree.tree)
 #     # Количество параметров команды 3 и каталог существует
-#     if len(sys.argv) == 3 and Path(sys.argv[1]).exists():
-#         generate_tree(Path(sys.argv[1]), 0)
-#         save_file(tree_str, sys.argv[2])
-#     else:  # Текущий путь
-#         generate_tree(Path.cwd(), 0)
-#     print(tree_str)
+#     elif len(sys.argv) == 3 and Path(sys.argv[1]).exists():
+#         dirtree.set_path(sys.argv[1])
+#         dirtree.generate_tree()
+#         dirtree.set_filename(sys.argv[2])
+#         dirtree.save_file()
+#     else:  # Слишком много параметров для анализа
+#         print(«Слишком много параметров командной строки, проверьте! ')
+
+'''
+python dirtree.py 
+Распечатать дерево каталогов текущего каталога;
+
+python dirtree.py E:\Programming\Python\applications
+Распечатать дерево каталогов указанного каталога;
+
+python dirtree.py E:\Programming\Python\applications dirtree.txt
+Распечатать дерево каталогов указанного каталога и сохранить его как файл.
+'''
