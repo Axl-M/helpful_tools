@@ -33,6 +33,6 @@ def write_to_file(files_list):
         file.write('\n'.join(files_list))
 
 
-path = "X:\=НОВОЕ=\=Pro-14 способов заработка на своем сайте (2023) _[Юлия Литвина] — копия"
+path = "X:\ТЕСТОВЫЙ"
 files_list = get_files_list(path)
 write_to_file(files_list)

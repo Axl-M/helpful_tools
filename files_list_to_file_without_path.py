@@ -6,14 +6,15 @@
 
 import os
 
-# path = "X:\=НОВОЕ=\=Pro-14 способов заработка на своем сайте (2023) _[Юлия Литвина] — копия"
 # path = "c:/path/to/dir"
+path = r"X:\fleshka"
 
 # сделать список файлов дл текущей папки
 path = os.getcwd()
 
 
 with open(path + '/_files_list.txt', 'w', encoding='utf-8') as f:
+    print("START=============================")
     # root - путь до текущей директории
     # dirs - список подпапок этой директории
     # files - список файлов
