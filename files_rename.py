@@ -5,7 +5,8 @@
 
 import os
 
-def rename_files(path, old_substr, new_substr):
+
+def rename_files(path, old_substr, new_substr) -> None:
     """
     Функция переименования файлов и каталогов в заданном каталоге и его подкаталогах
     :param path: путь к каталогу
