@@ -10,7 +10,7 @@
 ### rename_files_pyqt.py
 - то же самое с GUI на pyQt6
 
-### delete_from_name.py 
+### delete_from_na[files_to_list.py](files_to_list.py)me.py 
 - по всем файлам и подкаталогам в указанном каталоге
 и заменить все вхождения строки 'old_string' на строку 'new_string'  
 При этом сохранить структуру каталогов
