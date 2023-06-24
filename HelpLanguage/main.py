@@ -89,3 +89,4 @@ def sort(dictionary: dict) -> dict:
 
 if __name__ == '__main__':
     walk(FIND_DIRECTORY)
+
