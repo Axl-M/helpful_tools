@@ -27,12 +27,13 @@ def conversion(file):
         img.save(name + TO_EXTENSION)
         os.remove(file)
 
+
 def resize(file):
     img = Image.open(file)
-    img.thumbnail(MAX_SIZE, Image.ANTIALIAS)
+    # img.thumbnail(MAX_SIZE, Image.ANTIALIAS) # ANTIALIAS - упразднено
+    img.thumbnail(MAX_SIZE, Image.LANCZOS)
     img.save(file)
 
 
 if __name__ == "__main__":
     walk(DIRECTORY)
-
