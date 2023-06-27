@@ -4,6 +4,7 @@
 """
 import os
 import eyed3
+import transliterate
 
 FIND_DIRECTORY = 'Test'
 
@@ -23,13 +24,18 @@ def set_tags(file):
     # если тег отсутствует - нужно ИНИЦИАЛИЗИРВАТЬ
     if not audiofile.tag:
         audiofile.initTag()
+
     # audiofile.tag.title = 'моё Название'
-    audiofile.tag.title = name
-    #  если им альбома не указано
+    # print(audiofile.tag.title)
+    # print(audiofile.tag.album)
+
+    # для именования тега используем имя файла (name)
+    # заменить кириллицу на латиницу
+    audiofile.tag.title = transliterate.translit(name, reversed=True)
+    #  если имя альбома не указано
     if not audiofile.tag.album:
         audiofile.tag.album = 'Other'
 
-    # audiofile.tag.title = "The edge"
     audiofile.tag.save()
 
 
