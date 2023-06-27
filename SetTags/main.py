@@ -3,6 +3,7 @@
 
 """
 import os
+import eyed3
 
 FIND_DIRECTORY = 'Test'
 
@@ -14,7 +15,10 @@ def walk(directory):
 
 
 def set_tags(file):
-    print(file)
+    # print(file)
+    audiofile = eyed3.load(file)
+    audiofile.tag.title = "The edge"
+    audiofile.tag.save()
 
 
 if __name__ == '__main__':
