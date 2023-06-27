@@ -15,6 +15,7 @@ with sr.AudioFile(FILE) as source:
 # audio = r.record(source)
 
 try:
+    # обязательно указать язык (по умолчанию пытается распознать англ - будет ошибка)
     text = r.recognize_google(audio, language='ru-RU')
     print(text)
 except sr.UnknownValueError:
